@@ -1,0 +1,19 @@
+<div id="navbar" class="navbar navbar-default navbar-inverse navbar-static-top" role="navigation" ng-model="collapsed" bs-collapse>
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" bs-collapse-toggle>
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/">honbot</a>
+        </div>
+        <div class="navbar-collapse collapse" bs-collapse-target>
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-class="{'active': vm.team == 'legion'}"><a style="color: #5cb85c;" href="#/team/legion" class="text-success">Legion</a></li>
+                <li ng-class="{'active': vm.team == 'hellborne'}"><a style="color: #d9534f;" href="#/team/hellborne" class="text-danger">Hellborne</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
