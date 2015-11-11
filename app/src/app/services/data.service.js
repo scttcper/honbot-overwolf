@@ -1,3 +1,7 @@
+function plugin() {
+    return document.querySelector('#plugin');
+}
+
 export class DataService {
     constructor($window, $location, $q) {
         'ngInject';
@@ -52,8 +56,21 @@ spectators:`;
     }
     getData() {
         return this.$q((resolve, reject) => {
-            let data = this.parseFile(this.sample);
-            resolve(data);
+            // let data = this.parseFile(this.sample);
+            if(window.location.host === 'localhost:3000'){
+                return resolve(this.parseFile(this.sample));
+            }
+            plugin().getTextFile(
+                plugin().MYDOCUMENTS + "/Heroes of Newerth/game/gameinfo.ini",
+                true, 
+                (status, data) => {
+                    if (!status) {
+                        console.log("failed to get Overwolf.exe.config contents");
+                    } else {
+                        console.log(data);
+                        resolve(this.parseFile(data));
+                    }
+                });
         });
     }
     parseFile(data) {
@@ -76,8 +93,8 @@ spectators:`;
             general: this.parseGeneral(object.general),
         };
     }
-    parseNumber(str){
-        if(!isNaN(str)){
+    parseNumber(str) {
+        if (!isNaN(str)) {
             return Number(str);
         }
         return str;

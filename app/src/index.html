@@ -20,7 +20,10 @@
     <!-- endbuild -->
   </head>
   <body>
-
+    <script>
+    navigator.plugins.refresh(false);
+    </script>
+    <embed id="plugin" type="application/x-io-plugin" width=0px height=0px></embed>
     <div ng-view></div>
 
     <!-- build:js(src) scripts/vendor.js -->
