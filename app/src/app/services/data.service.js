@@ -4,11 +4,13 @@ export class DataService {
 
         this.$location = $location;
         this.$q = $q;
+        this.REG_GROUP = /^\s*\[(.+?)\]\s*$/;
+        this.REG_PROP = /^\s*([^#].*?)\s*:\s*(.*?)\s*$/;
         this.sample = `[general]
 last_file_update_unix_ts:1444108966
 local_player:stridex
 match_name:LocalBotsGame
-map_name:Forests of Caldavar
+map_name:Forests of Caldalet
 match_id:-1
 host:stridex
 server_name:Unnamed Server
@@ -48,9 +50,74 @@ player_9:GlaciusBot|3258111|/heroes/frosty/icon.tga|Hero_Frosty|16|0|5|3
 spectators:`;
 
     }
-    getData(){
+    getData() {
         return this.$q((resolve, reject) => {
-            resolve(this.sample);
+            let data = this.parseFile(this.sample);
+            resolve(data);
         });
+    }
+    parseFile(data) {
+        let object = {};
+        let lines = data.split('\n');
+        let group, match;
+
+        for (let i = 0, len = lines.length; i !== len; i++) {
+            match = lines[i].match(this.REG_GROUP);
+            if (match) {
+                object[match[1]] = group = object[match[1]] || {};
+            } else if (group && (match = lines[i].match(this.REG_PROP))) {
+                group[match[1]] = match[2];
+            }
+        }
+        return {
+            teams: this.parseTeam(object.players),
+            players: this.parsePlayers(object.players),
+            realtime: this.parseRealtime(object.realtime),
+            general: this.parseGeneral(object.general),
+        };
+    }
+    parseNumber(str){
+        if(!isNaN(str)){
+            return Number(str);
+        }
+        return str;
+    }
+    parseTeam(obj) {
+        // # starting towers|current towers|melee barracks left|ranged barracks left|base health percent
+        // team1_info:11|6|3|3|1.00
+        // team2_info:11|3|1|1|1.00
+        let res = [];
+        let keys = ['starting_tower', 'current_towers', 'melee_barracks_left', 'ranged_barracks_left', 'base_health_percent'];
+        _.forEach(obj, (val, key) => {
+            val = val.split('|');
+            val = _.map(val, this.parseNumber);
+            if (key.startsWith('team')) {
+                res.push(_.zipObject(keys, val));
+            }
+        });
+        return res;
+    }
+    parsePlayers(obj) {
+        // nickname|account_id|icon_path|hero_name|level|kills|deaths|assists
+        let res = [];
+        let keys = ['nickname', 'account_id', 'icon_path', 'hero_name', 'level', 'kills', 'deaths', 'assists'];
+        _.forEach(obj, (val, key) => {
+            val = val.split('|');
+            val = _.map(val, this.parseNumber);
+            if (key.startsWith('player')) {
+                res.push(_.zipObject(keys, val));
+            }
+        });
+        return res;
+    }
+    parseRealtime(obj) {
+        _.forEach(obj, (val, key) => {
+            val = this.parseNumber(val);
+            obj[key] = val;
+        });
+        return obj;
+    }
+    parseGeneral(obj) {
+        return obj;
     }
 }
