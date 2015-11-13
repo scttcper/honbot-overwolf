@@ -14,10 +14,15 @@ export function NavbarDirective() {
 }
 
 class NavbarController {
-    constructor($routeParams) {
+    constructor($routeParams, $route) {
         'ngInject';
+        this.$route = $route;
+
         if ($routeParams.team) {
             this.team = $routeParams.team.toLowerCase();
         }
+    }
+    reloadRoute() {
+        this.$route.reload();
     }
 }

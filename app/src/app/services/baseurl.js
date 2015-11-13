@@ -4,7 +4,7 @@ export function BaseUrlInterceptor($location) {
 
     function host() {
         if (hosted === 'localhost' || hosted === '127.0.0.1') {
-            // return '//api.honbot.com';
+            return '//api.honbot.com';
             return '//localhost:5000';
         }
         return '//api.honbot.com';

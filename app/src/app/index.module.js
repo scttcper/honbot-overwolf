@@ -5,6 +5,7 @@ import { HomeController } from './home/home.controller';
 import { TeamController } from './team/team.controller';
 import { NavbarDirective } from './navbar/navbar.directive';
 import { DataService } from './services/data.service';
+import { ApiService } from './services/api.service';
 
 import { BaseUrlInterceptor } from './services/baseurl';
 
@@ -12,11 +13,13 @@ angular.module('app', [
         'ngRoute',
         'mgcrea.ngStrap',
         'angular-loading-bar',
+        'ngNumeraljs',
     ])
     .config(config)
     .config(routerConfig)
     .run(runBlock)
     .service('DataService', DataService)
+    .service('ApiService', ApiService)
     .controller('HomeController', HomeController)
     .controller('TeamController', TeamController)
     .factory('BaseUrlInterceptor', BaseUrlInterceptor)

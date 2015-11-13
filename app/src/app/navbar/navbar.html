@@ -11,6 +11,7 @@
         </div>
         <div class="navbar-collapse collapse" bs-collapse-target>
             <ul class="nav navbar-nav navbar-right">
+                <li><a ng-click="vm.reloadRoute()" href="" class="text-success"><span class="glyphicon glyphicon-refresh"></span> Reload</a></li>
                 <li ng-class="{'active': vm.team == 'legion'}"><a style="color: #5cb85c;" href="#/team/legion" class="text-success">Legion</a></li>
                 <li ng-class="{'active': vm.team == 'hellborne'}"><a style="color: #d9534f;" href="#/team/hellborne" class="text-danger">Hellborne</a></li>
             </ul>

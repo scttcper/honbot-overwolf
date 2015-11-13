@@ -1,13 +1,90 @@
 <hb-navbar></hb-navbar>
 <div class="container">
     <div class="row">
-        <div class="col-xs-12">
-            <pre>{{ vm.team | json:4 }}</pre>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
-            <pre>{{ vm.team | json:4 }}</pre>
+        <div class="col-md-5ths col-xs-6" ng-repeat="pl in vm.players">
+            <div class="media">
+                <div class="media-left media-middle">
+                    <img ng-src="https://www.heroesofnewerth.com/getAvatar_SSL.php?id={{ pl.account_id }}" height="45" width="45">
+                </div>
+                <div class="media-body">
+                    <h4 style="margin-bottom: 0;bottom:0;">{{ ::pl.nickname }}</h4>
+                    <h5 class="text-info" style="margin-top:5px;">{{ ::pl[vm.m + '_amm_team_rating'] || pl[vm.m + '_pub_skill'] | numeraljs:'0' }}</h5>
+                </div>
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <td>Kills
+                                <span class="pull-right">{{ ::pl[vm.m + '_avg_kills'] | number:2 }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Deaths
+                                <span class="pull-right">{{ ::pl[vm.m + '_avg_deaths'] | number:2 }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Assists
+                                <span class="pull-right">{{ ::pl[vm.m + '_avg_assists'] | number:2 }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span data-title="Kills / Deaths" data-placement="right" bs-tooltip>KDR</span>
+                                <span class="pull-right">{{ ::pl[vm.m + '_kdr'] | number:2 }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span data-title="Kills + Assists / Deaths" data-placement="right" bs-tooltip>KDA
+                            <span class="pull-right">{{ ::pl[vm.m + '_kadr'] | number:2 }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span data-title="Experience Per Minute" data-placement="right" bs-tooltip>XPM</span>
+                                <span class="pull-right">{{ ::pl[vm.m + '_avg_xpm'] | number:0 }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span data-title="Gold Per Minute" data-placement="right" bs-tooltip>GPM</span>
+                                <span class="pull-right">{{ ::pl[vm.m + '_avg_gpm'] | number:0 }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span data-title="Actions Per Minute" data-placement="right" bs-tooltip>APM</span>
+                                <span class="pull-right">{{ ::pl[vm.m + '_avg_apm'] | number:0 }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span data-title="Creep Kills" data-placement="right" bs-tooltip>CS</span>
+                                <span class="pull-right">{{ ::pl[vm.m + '_avg_creeps'] | number:0 }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span data-title="Creep Denies" data-placement="right" bs-tooltip>CD</span>
+                                <span class="pull-right">{{ ::pl[vm.m + '_avg_denies'] | number:0 }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span data-title="Hero Damage" data-placement="right" bs-tooltip>HD</span>
+                                <span class="pull-right">{{ ::pl[vm.m + '_avg_herodmg'] | numeraljs:'0.0a' }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span data-title="Tower Damage" data-placement="right" bs-tooltip>TD</span>
+                                <span class="pull-right">{{ ::pl[vm.m + '_avg_bdmg'] | numeraljs:'0.0a' }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span data-title="Wards Placed" data-placement="right" bs-tooltip>Wards</span>
+                                <span class="pull-right">{{ ::pl[vm.m + '_avg_wards'] | number:1 }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span data-title="Consumables" data-placement="right" bs-tooltip>Consume</span>
+                                <span class="pull-right">{{ ::pl[vm.m + '_avg_consumables'] | number:1 }}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

@@ -42,15 +42,15 @@ team1_info:11|6|3|3|1.00
 team2_info:11|3|1|1|1.00
 # nickname|account_id|icon_path|hero_name|level|kills|deaths|assists
 player_0:stridex|3258111|/heroes/scout/icon.tga|Hero_Scout|8|1|1|0
-player_1:DampeerBot|3258111|/heroes/dampeer/icon.tga|Hero_Dampeer|19|5|2|3
-player_2:PredatorBot|3258111|/heroes/predator/icon.tga|Hero_Predator|20|4|2|4
-player_3:ParasiteBot|3258111|/heroes/parasite/icon.tga|Hero_Parasite|13|0|0|0
-player_4:ArachnaBot|3258111|/heroes/arachna/icon.tga|Hero_Arachna|24|6|1|0
-player_5:DefilerBot|3258111|/heroes/defiler/icon.tga|Hero_Defiler|21|0|2|0
-player_6:ForsakenBot|3258111|/heroes/forsaken_archer/icon.tga|Hero_ForsakenArcher|21|4|1|1
-player_7:ShamanBot|3258111|/heroes/shaman/icon.tga|Hero_Shaman|17|2|3|3
-player_8:MagmusBot|3258111|/heroes/magmar/icon.tga|Hero_Magmar|15|0|5|2
-player_9:GlaciusBot|3258111|/heroes/frosty/icon.tga|Hero_Frosty|16|0|5|3
+player_1:Slaskedyret|2991660|/heroes/dampeer/icon.tga|Hero_Dampeer|19|5|2|3
+player_2:DifferentGuy|3102581|/heroes/predator/icon.tga|Hero_Predator|20|4|2|4
+player_3:Fuqin|8711642|/heroes/parasite/icon.tga|Hero_Parasite|13|0|0|0
+player_4:SactoMentor|8283424|/heroes/arachna/icon.tga|Hero_Arachna|24|6|1|0
+player_5:Haxxeren|3075077|/heroes/defiler/icon.tga|Hero_Defiler|21|0|2|0
+player_6:KheZu|3324626|/heroes/forsaken_archer/icon.tga|Hero_ForsakenArcher|21|4|1|1
+player_7:baltazar|3099918|/heroes/shaman/icon.tga|Hero_Shaman|17|2|3|3
+player_8:Fireflasher|3016415|/heroes/magmar/icon.tga|Hero_Magmar|15|0|5|2
+player_9:fsnc|8499135|/heroes/frosty/icon.tga|Hero_Frosty|16|0|5|3
 spectators:`;
 
     }
@@ -62,7 +62,7 @@ spectators:`;
             }
             plugin().getTextFile(
                 plugin().MYDOCUMENTS + "/Heroes of Newerth/game/gameinfo.ini",
-                true, 
+                true,
                 (status, data) => {
                     if (!status) {
                         console.log("failed to get Overwolf.exe.config contents");
@@ -117,9 +117,10 @@ spectators:`;
     parsePlayers(obj) {
         // nickname|account_id|icon_path|hero_name|level|kills|deaths|assists
         let res = [];
-        let keys = ['nickname', 'account_id', 'icon_path', 'hero_name', 'level', 'kills', 'deaths', 'assists'];
+        let keys = ['nickname', 'account_id', 'icon_path', 'hero_name', 'level', 'kills', 'deaths', 'assists', 'team'];
         _.forEach(obj, (val, key) => {
             val = val.split('|');
+            val.push(Number(key.split('_')[1] > 4) + 1);
             val = _.map(val, this.parseNumber);
             if (key.startsWith('player')) {
                 res.push(_.zipObject(keys, val));
