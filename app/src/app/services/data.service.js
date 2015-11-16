@@ -57,20 +57,19 @@ spectators:`;
     getData() {
         return this.$q((resolve, reject) => {
             // let data = this.parseFile(this.sample);
-            if(window.location.host === 'localhost:3000'){
-                return resolve(this.parseFile(this.sample));
-            }
-            plugin().getTextFile(
-                plugin().MYDOCUMENTS + "/Heroes of Newerth/game/gameinfo.ini",
-                true,
-                (status, data) => {
-                    if (!status) {
-                        console.log("failed to get Overwolf.exe.config contents");
-                    } else {
-                        console.log(data);
+            if (window.location.host === 'localhost:3000') {
+                resolve(this.parseFile(this.sample));
+            } else {
+                plugin().getTextFile(
+                    plugin().MYDOCUMENTS + "/Heroes of Newerth/game/gameinfo.ini",
+                    true, (status, data) => {
+                        if (!status) {
+                            reject('failed to get Overwolf.exe.config contents');
+                        }
                         resolve(this.parseFile(data));
-                    }
-                });
+                    });
+            }
+
         });
     }
     parseFile(data) {
