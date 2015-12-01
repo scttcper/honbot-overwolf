@@ -7,6 +7,7 @@ export class DataService {
         'ngInject';
 
         this.$location = $location;
+        this.$window = $window;
         this.$q = $q;
         this.REG_GROUP = /^\s*\[(.+?)\]\s*$/;
         this.REG_PROP = /^\s*([^#].*?)\s*:\s*(.*?)\s*$/;
@@ -57,7 +58,7 @@ spectators:`;
     getData() {
         return this.$q((resolve, reject) => {
             // let data = this.parseFile(this.sample);
-            if (window.location.host === 'localhost:3000') {
+            if (this.$window.location.host === 'localhost:3000') {
                 resolve(this.parseFile(this.sample));
             } else {
                 plugin().getTextFile(
