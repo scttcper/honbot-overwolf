@@ -1,4 +1,4 @@
-export class TeamController {
+export class PlayerController {
     constructor($routeParams, DataService, ApiService) {
         'ngInject';
         this.ApiService = ApiService;

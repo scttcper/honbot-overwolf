@@ -3,6 +3,7 @@ import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
 import { HomeController } from './home/home.controller';
 import { TeamController } from './team/team.controller';
+import { PlayerController } from './player/player.controller';
 import { NavbarDirective } from './navbar/navbar.directive';
 import { DataService } from './services/data.service';
 import { ApiService } from './services/api.service';
