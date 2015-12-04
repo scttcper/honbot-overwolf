@@ -4,6 +4,7 @@ import { runBlock } from './index.run';
 import { HomeController } from './home/home.controller';
 import { TeamController } from './team/team.controller';
 import { PlayerController } from './player/player.controller';
+import { PlayerUsedHeroesDirective } from './player/player.used.heroes.directive';
 import { NavbarDirective } from './navbar/navbar.directive';
 import { DataService } from './services/data.service';
 import { ApiService } from './services/api.service';
@@ -24,4 +25,5 @@ angular.module('app', [
     .controller('HomeController', HomeController)
     .controller('TeamController', TeamController)
     .factory('BaseUrlInterceptor', BaseUrlInterceptor)
+    .directive('hbPlayerUsedHeroes', PlayerUsedHeroesDirective)
     .directive('hbNavbar', NavbarDirective);

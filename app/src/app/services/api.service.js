@@ -39,4 +39,11 @@ export class ApiService {
             cache: true
         });
     }
+    playerUsedHeroes(pid, mode) {
+        return this.$http({
+            method: 'GET',
+            url: `/api/player/usedHeroes/${pid}/${mode}`,
+            cache: true
+        });
+    }
 }
