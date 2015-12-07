@@ -5,6 +5,7 @@ import { HomeController } from './home/home.controller';
 import { TeamController } from './team/team.controller';
 import { PlayerController } from './player/player.controller';
 import { PlayerUsedHeroesDirective } from './player/player.used.heroes.directive';
+import { HeroImgFromNameDirective } from './player/heroimg.fromname.directive';
 import { NavbarDirective } from './navbar/navbar.directive';
 import { DataService } from './services/data.service';
 import { ApiService } from './services/api.service';
@@ -26,4 +27,5 @@ angular.module('app', [
     .controller('TeamController', TeamController)
     .factory('BaseUrlInterceptor', BaseUrlInterceptor)
     .directive('hbPlayerUsedHeroes', PlayerUsedHeroesDirective)
+    .directive('hbHeroImgFromName', HeroImgFromNameDirective)
     .directive('hbNavbar', NavbarDirective);

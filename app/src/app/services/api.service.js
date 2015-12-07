@@ -46,4 +46,11 @@ export class ApiService {
             cache: true
         });
     }
+    heroIdFromName(name) {
+        return this.$http({
+            method: 'GET',
+            url: `/api/heroes/getHeroId/${name}`,
+            cache: true
+        });
+    }
 }

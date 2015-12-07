@@ -1,17 +1,35 @@
 export class TeamController {
     constructor($routeParams, DataService, ApiService) {
         'ngInject';
+        // todo allow changing mode
+        this.m = 'rnk';
+
         this.ApiService = ApiService;
 
-        this.teamId = Number($routeParams.team !== 'legion') + 1;
-
-        DataService.getData().then(res => this.getFromCache(res));
-        this.m = 'rnk';
+        DataService.getData().then(res => {
+            this.data = res;
+            this.getFromCache(res.players);
+        });
     }
-    getFromCache(res) {
-        let pids = _.pluck(res.players, 'account_id').join(',');
+    getFromCache(players) {
+        let pids = _.pluck(players, 'account_id').join(',');
         this.ApiService.bulkPlayers(pids).then(res => {
-            this.players = res.data;
+            _.forEach(res.data, (n) => {
+                let p = _.find(players, 'account_id', n.account_id);
+                p.bulk = true;
+                p = _.merge(p, n);
+            });
+            this.checkAge();
+        });
+    }
+    checkAge() {
+        _.forEach(this.data.players, (n) => {
+            if (moment.utc().diff(moment(n.updated), 'days') > 1 || !n.bulk) {
+                this.ApiService.singlePlayer(n.nickname).then(res => {
+                    console.log('UPDATING ' + res.data.nickname);
+                    n = _.merge(n, res.data);
+                });
+            }
         });
     }
 }

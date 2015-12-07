@@ -117,10 +117,11 @@ spectators:`;
     parsePlayers(obj) {
         // nickname|account_id|icon_path|hero_name|level|kills|deaths|assists
         let res = [];
-        let keys = ['nickname', 'account_id', 'icon_path', 'hero_name', 'level', 'kills', 'deaths', 'assists', 'team'];
+        let keys = ['nickname', 'account_id', 'icon_path', 'hero_name', 'level', 'kills', 'deaths', 'assists', 'team', 'position'];
         _.forEach(obj, (val, key) => {
             val = val.split('|');
             val.push(Number(key.split('_')[1] > 4) + 1);
+            val.push(Number(key.split('_')[1]));
             val = _.map(val, this.parseNumber);
             if (key.startsWith('player')) {
                 res.push(_.zipObject(keys, val));
