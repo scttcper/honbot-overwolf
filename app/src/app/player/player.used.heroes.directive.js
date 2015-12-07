@@ -3,7 +3,7 @@ export function PlayerUsedHeroesDirective() {
 
     let directive = {
         restrict: 'E',
-        template: `<img ng-repeat="hero in vm.heroes | limitTo:5 track by $index" ng-src="//www.heroesofnewerth.com/images/heroes/{{::hero._id}}/icon_128.jpg" height="45" width="45">`,
+        template: `<img ng-repeat="hero in vm.heroes | limitTo:5 track by $index" ng-src="http://www.heroesofnewerth.com/images/heroes/{{::hero._id}}/icon_128.jpg" height="45" width="45">`,
         scope: {
             player: '='
         },
