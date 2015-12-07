@@ -65,10 +65,10 @@
                 <tr ng-repeat="pl in vm.data.players track by $index" class="player-{{ pl.position }}">
                     <td>
                         <hb-hero-img-from-name name="pl.hero_name"></hb-hero-img-from-name>
-                        <a href="/player/{{ pl.nickname }}/">
+                        <!-- <a href="/player/{{ pl.nickname }}/"> -->
                             <img src='https://www.heroesofnewerth.com/getAvatar_SSL.php?id={{ pl.account_id }}' width='45'>
                             {{ pl.nickname }}
-                        </a>
+                        <!-- </a> -->
                         <span class="text-info" style="margin-top:5px;color:#8E8E8E;">{{ pl[vm.m + '_amm_team_rating'] || pl[vm.m + '_pub_skill'] | numeraljs:'0' }}</span>
                     </td>
                     <td class="text-center">

@@ -26,7 +26,6 @@ export class TeamController {
         _.forEach(this.data.players, (n) => {
             if (moment.utc().diff(moment(n.updated), 'days') > 1 || !n.bulk) {
                 this.ApiService.singlePlayer(n.nickname).then(res => {
-                    console.log('UPDATING ' + res.data.nickname);
                     n = _.merge(n, res.data);
                 });
             }
