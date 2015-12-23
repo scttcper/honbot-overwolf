@@ -2,7 +2,7 @@ export function routerConfig($routeProvider) {
     'ngInject';
     $routeProvider
         .when('/', {
-            templateUrl: 'app/team/team.html',
+            templateUrl: 'app/team/overview.html',
             controller: 'TeamController',
             controllerAs: 'vm'
         })

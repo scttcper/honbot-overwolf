@@ -3,6 +3,7 @@ import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
 import { HomeController } from './home/home.controller';
 import { TeamController } from './team/team.controller';
+import { PlayerStatsDirective } from './team/playerstats.directive';
 import { PlayerController } from './player/player.controller';
 import { PlayerUsedHeroesDirective } from './player/player.used.heroes.directive';
 import { HeroImgFromNameDirective } from './player/heroimg.fromname.directive';
@@ -14,7 +15,6 @@ import { BaseUrlInterceptor } from './services/baseurl';
 
 angular.module('app', [
         'ngRoute',
-        'mgcrea.ngStrap',
         'angular-loading-bar',
         'ngNumeraljs',
     ])
@@ -26,6 +26,7 @@ angular.module('app', [
     .controller('HomeController', HomeController)
     .controller('TeamController', TeamController)
     .factory('BaseUrlInterceptor', BaseUrlInterceptor)
+    .directive('hbPlayerStats', PlayerStatsDirective)
     .directive('hbPlayerUsedHeroes', PlayerUsedHeroesDirective)
     .directive('hbHeroImgFromName', HeroImgFromNameDirective)
     .directive('hbNavbar', NavbarDirective);
