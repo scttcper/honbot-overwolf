@@ -1,4 +1,4 @@
-<div class="b-user__data">
+<div class="b-user__data" ng-if="vm.p.statsLoaded">
     <div class="g-avatar" style="background-image: url(https://www.heroesofnewerth.com/getAvatar_SSL.php?id={{ vm.p.account_id }})"></div>
     <div class="b-user__card">
         <div class="b-user__card-name">{{ vm.p.nickname }}</div>
@@ -39,26 +39,18 @@
         </div>
     </div>
     <div class="b-stats">
-        <div class="b-stats__item"><img src="assets/stats/001.jpg" alt=""></div>
-        <div class="b-stats__item"><img src="assets/stats/002.jpg" alt=""></div>
-        <div class="b-stats__item"><img src="assets/stats/003.jpg" alt=""></div>
-        <div class="b-stats__item"><img src="assets/stats/004.jpg" alt=""></div>
-        <div class="b-stats__item disable"></div>
-        <div class="b-stats__item disable"></div>
-
-        <div class="b-stats__hint">view full stats</div>
+        <div class="b-stats__item" ng-repeat="hero in ::vm.heroes | limitTo:6">
+            <img ng-src="http://www.heroesofnewerth.com/images/heroes/{{::hero._id}}/icon_128.jpg">
+        </div>
     </div>
+    <div class="b-stats__hint">view full stats</div>
 </div>
-
-<!-- TODO -->
-<!-- <div class="b-user no-stats">
-
+<div class="b-user no-stats" ng-if="!vm.p.statsLoaded">
     <div class="b-user__data">
-        <div class="g-avatar" style="background-image: url(assets/avatars/003.jpg);"></div>
+        <div class="g-avatar" style="background-image: url(https://www.heroesofnewerth.com/getAvatar_SSL.php?id={{ vm.p.account_id }})"></div>
         <div class="b-user__card">
             <div class="b-user__card-name">MrLogaz</div>
         </div>
         <div class="b-user__data-no-stats">No stats available</div>
     </div>
-
-</div> -->
+</div>

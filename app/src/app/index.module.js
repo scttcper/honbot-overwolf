@@ -1,32 +1,21 @@
 import { config } from './index.config';
-import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
-import { HomeController } from './home/home.controller';
-import { TeamController } from './team/team.controller';
-import { PlayerStatsDirective } from './team/playerstats.directive';
-import { PlayerController } from './player/player.controller';
-import { PlayerUsedHeroesDirective } from './player/player.used.heroes.directive';
-import { HeroImgFromNameDirective } from './player/heroimg.fromname.directive';
-import { NavbarDirective } from './navbar/navbar.directive';
 import { DataService } from './services/data.service';
 import { ApiService } from './services/api.service';
+import { MainController } from './views/main.controller';
+import { OverviewDirective } from './views/overview.directive';
+import { OverviewCardDirective } from './views/overview.card.directive';
 
 import { BaseUrlInterceptor } from './services/baseurl';
 
 angular.module('app', [
-        'ngRoute',
-        'angular-loading-bar',
         'ngNumeraljs',
     ])
     .config(config)
-    .config(routerConfig)
     .run(runBlock)
+    .factory('BaseUrlInterceptor', BaseUrlInterceptor)
     .service('DataService', DataService)
     .service('ApiService', ApiService)
-    .controller('HomeController', HomeController)
-    .controller('TeamController', TeamController)
-    .factory('BaseUrlInterceptor', BaseUrlInterceptor)
-    .directive('hbPlayerStats', PlayerStatsDirective)
-    .directive('hbPlayerUsedHeroes', PlayerUsedHeroesDirective)
-    .directive('hbHeroImgFromName', HeroImgFromNameDirective)
-    .directive('hbNavbar', NavbarDirective);
+    .controller('MainController', MainController)
+    .directive('hbOverviewCard', OverviewCardDirective)
+    .directive('hbOverview', OverviewDirective);
