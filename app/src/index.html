@@ -24,7 +24,13 @@
     navigator.plugins.refresh(false);
     </script>
     <embed id="plugin" type="application/x-io-plugin" width=0px height=0px></embed>
-    <div ng-view></div>
+    <div ng-controller="MainController as main">
+        <div ng-if="main.showOverview" class="animate-if b-panel b-panel__type4 js-panel js-hotkey-open">
+            <hb-overview></hb-overview>
+            <!-- <a ng-click="main.closeOverview()" class="g-button g-button__settings js-settings"></a> -->
+            <a ng-click="main.closeOverview()" class="g-button g-button__close js-close"></a>
+        </div>
+    </div>
 
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->

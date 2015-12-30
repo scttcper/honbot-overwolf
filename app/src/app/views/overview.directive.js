@@ -1,5 +1,20 @@
-export class TeamController {
-    constructor($routeParams, DataService, ApiService) {
+export function OverviewDirective() {
+    'ngInject';
+
+    let directive = {
+        restrict: 'E',
+        templateUrl: 'app/views/overview.html',
+        scope: {},
+        controller: OverviewController,
+        controllerAs: 'vm',
+        bindToController: true
+    };
+
+    return directive;
+}
+
+class OverviewController {
+    constructor(DataService, ApiService) {
         'ngInject';
         // todo allow changing mode
         this.m = 'rnk';
@@ -15,8 +30,9 @@ export class TeamController {
         let pids = _.pluck(players, 'account_id').join(',');
         this.ApiService.bulkPlayers(pids).then(res => {
             _.forEach(res.data, (n) => {
+                // match the player returned in the bulk and merge the stats into the existing player object
                 let p = _.find(players, 'account_id', n.account_id);
-                p.bulk = true;
+                p.statsLoaded = true;
                 p = _.merge(p, n);
             });
             this.checkAge();
@@ -24,8 +40,9 @@ export class TeamController {
     }
     checkAge() {
         _.forEach(this.data.players, (n) => {
-            if (moment.utc().diff(moment(n.updated), 'days') > 1 || !n.bulk) {
+            if (moment.utc().diff(moment(n.updated), 'days') > 2 || !n.statsLoaded) {
                 this.ApiService.singlePlayer(n.nickname).then(res => {
+                    n.statsLoaded = true;
                     n = _.merge(n, res.data);
                 });
             }

@@ -1,0 +1,56 @@
+<div class="b-user__data" ng-if="vm.p.statsLoaded">
+    <div class="g-avatar" style="background-image: url(https://www.heroesofnewerth.com/getAvatar_SSL.php?id={{ vm.p.account_id }})"></div>
+    <div class="b-user__card">
+        <div class="b-user__card-name">{{ vm.p.nickname }}</div>
+        <div class="b-user__card-statistic">{{ vm.p[vm.m + '_wins'] + vm.p[vm.m + '_losses'] }} Games, {{ vm.p[vm.m + '_winpercent'] * 100 | number:0 }}% Won</div>
+        <!-- <div class="b-user__card-statistic">96 played as Magic Phy</div> -->
+    </div>
+    <div class="b-user__data-mmr">
+        <div class="b-mmr__col1">
+            <div class="b-mmr__col1-title">mmr</div>
+            <div class="b-mmr__col1-desk">{{ vm.p[vm.m + '_amm_team_rating'] || vm.p[vm.m + '_pub_skill'] | numeraljs:'0' }}</div>
+        </div>
+        <div class="b-mmr__col2">
+            <div class="b-mmr__col2-item">{{ vm.p[vm.m + '_avg_kills'] | number:1 }}<i>k</i></div>
+            <div class="b-mmr__col2-item">{{ vm.p[vm.m + '_avg_deaths'] | number:1 }}<i>d</i></div>
+            <div class="b-mmr__col2-item">{{ vm.p[vm.m + '_avg_assists'] | number:1 }}<i>a</i></div>
+        </div>
+    </div>
+    <div class="b-user__data-wards">
+        <div class="b-wards__col1">
+            <div class="b-wards__col1-title">wards</div>
+            <div class="b-wards__col1-desk">{{ vm.p[vm.m + '_avg_wards'] | number:1 }}</div>
+        </div>
+        <div class="b-wards__col2">
+            <div class="b-wards__col2-title">apm</div>
+            <div class="b-wards__col2-desk">{{ vm.p[vm.m + '_avg_apm'] | number:0 }}</div>
+        </div>
+        <div class="b-wards__col2">
+            <div class="b-wards__col2-title">gpm</div>
+            <div class="b-wards__col2-desk">{{ vm.p[vm.m + '_avg_gpm'] | number:0 }}</div>
+        </div>
+        <div class="b-wards__col2">
+            <div class="b-wards__col2-title">xpm</div>
+            <div class="b-wards__col2-desk">{{ vm.p[vm.m + '_avg_xpm'] | number:0 }}</div>
+        </div>
+        <div class="b-wards__col3">
+            <div class="b-wards__col3-title">cs</div>
+            <div class="b-wards__col3-desk">{{ vm.p[vm.m + '_avg_creeps'] | number:0 }}</div>
+        </div>
+    </div>
+    <div class="b-stats">
+        <div class="b-stats__item" ng-repeat="hero in ::vm.heroes | limitTo:6">
+            <img ng-src="http://www.heroesofnewerth.com/images/heroes/{{::hero._id}}/icon_128.jpg">
+        </div>
+    </div>
+    <div class="b-stats__hint">view full stats</div>
+</div>
+<div class="b-user no-stats" ng-if="!vm.p.statsLoaded">
+    <div class="b-user__data">
+        <div class="g-avatar" style="background-image: url(https://www.heroesofnewerth.com/getAvatar_SSL.php?id={{ vm.p.account_id }})"></div>
+        <div class="b-user__card">
+            <div class="b-user__card-name">MrLogaz</div>
+        </div>
+        <div class="b-user__data-no-stats">No stats available</div>
+    </div>
+</div>
