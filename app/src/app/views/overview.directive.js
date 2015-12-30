@@ -44,6 +44,8 @@ class OverviewController {
                 this.ApiService.singlePlayer(n.nickname).then(res => {
                     n.statsLoaded = true;
                     n = _.merge(n, res.data);
+                }, () => {
+                    n.fail = true;
                 });
             }
         });

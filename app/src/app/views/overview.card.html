@@ -51,6 +51,7 @@
         <div class="b-user__card">
             <div class="b-user__card-name">MrLogaz</div>
         </div>
-        <div class="b-user__data-no-stats">No stats available</div>
+        <div class="b-user__data-no-stats" ng-if="!vm.p.fail">Loading...</div>
+        <div class="b-user__data-no-stats" ng-if="vm.p.fail">No stats available</div>
     </div>
 </div>
