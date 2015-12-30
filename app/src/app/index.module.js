@@ -9,6 +9,7 @@ import { OverviewCardDirective } from './views/overview.card.directive';
 import { BaseUrlInterceptor } from './services/baseurl';
 
 angular.module('app', [
+        'ngAnimate',
         'ngNumeraljs',
     ])
     .config(config)

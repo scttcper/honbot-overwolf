@@ -2,16 +2,7 @@ function plugin() {
     return document.querySelector('#plugin');
 }
 
-export class DataService {
-    constructor($window, $location, $q) {
-        'ngInject';
-
-        this.$location = $location;
-        this.$window = $window;
-        this.$q = $q;
-        this.REG_GROUP = /^\s*\[(.+?)\]\s*$/;
-        this.REG_PROP = /^\s*([^#].*?)\s*:\s*(.*?)\s*$/;
-        this.sample = `[general]
+var sample = `[general]
 last_file_update_unix_ts:1444108966
 local_player:stridex
 match_name:LocalBotsGame
@@ -52,14 +43,23 @@ player_6:KheZu|3324626|/heroes/forsaken_archer/icon.tga|Hero_ForsakenArcher|21|4
 player_7:baltazar|3099918|/heroes/shaman/icon.tga|Hero_Shaman|17|2|3|3
 player_8:Fireflasher|3016415|/heroes/magmar/icon.tga|Hero_Magmar|15|0|5|2
 player_9:fsnc|8499135|/heroes/frosty/icon.tga|Hero_Frosty|16|0|5|3
-spectators:`;
+spectators:`
 
+export class DataService {
+    constructor($window, $location, $q) {
+        'ngInject';
+
+        this.$location = $location;
+        this.$window = $window;
+        this.$q = $q;
+        this.REG_GROUP = /^\s*\[(.+?)\]\s*$/;
+        this.REG_PROP = /^\s*([^#].*?)\s*:\s*(.*?)\s*$/;
     }
     getData() {
         return this.$q((resolve, reject) => {
             // let data = this.parseFile(this.sample);
             if (this.$window.location.host === 'localhost:3000') {
-                resolve(this.parseFile(this.sample));
+                resolve(this.parseFile(sample));
             } else {
                 plugin().getTextFile(
                     plugin().MYDOCUMENTS + "/Heroes of Newerth/game/gameinfo.ini",
