@@ -8,24 +8,18 @@
     "author":"Overwolf; Thorwe",
     "icon":"icon.png",
     "icon_gray":"icon_gray.png",
-    "description":"Sample app for using the IO plugin"
+    "description":"Honbot ingame stats for Heroes of Newerth (HoN)",
+    "dock_button_title":"honbot"
   },
   "data": {
     "start_window":"index",
     "windows":{
       "index":{
         "file":"index.html",
-        "transparent":false,
-        "resizable":true,
+        "transparent":true,
+        "resizable":false,
         "show_in_taskbar": true,
-        "size": {
-          "width": 600,
-          "height": 300
-        },
-        "start_position": {
-          "Top": 100,
-          "Left": 300
-        }
+        "show_minimize": false
       }
     },
     "plugins": [
