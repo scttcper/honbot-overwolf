@@ -17,6 +17,18 @@
 //
 //
 
+html, body {
+  background: transparent;
+  height: 100%;
+  cursor: default;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 
 // fade in and out
 /* The starting CSS styles for the enter animation */
@@ -59,16 +71,7 @@
 }
 
 
-html, body {
-  height:100%;
-  position:relative;
-}
 
-body{
-  // background:#000 url('../assets/background.jpg') center no-repeat;
-  background: #eee;
-  background-size:cover;
-}
 
 body,
 input, textarea, button {
