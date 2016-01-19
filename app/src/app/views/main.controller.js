@@ -5,7 +5,7 @@ export class MainController {
         // TODO
         // could probably make a service to pass around open and close
         // who's got time for that
-        this.showOverview = false;
+        this.showOverview = true;
 
         $document[0].addEventListener('keydown', (e) =>{
             if (e.shiftKey && e.keyCode == 9) {

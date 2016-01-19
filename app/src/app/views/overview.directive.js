@@ -41,7 +41,7 @@ class OverviewController {
     checkAge() {
         _.forEach(this.data.players, (n) => {
             if (moment.utc().diff(moment(n.updated), 'days') > 2 || !n.statsLoaded) {
-                this.ApiService.singlePlayer(n.nickname).then(res => {
+                this.ApiService.singlePlayer(n.nickname.split(']')[1]).then(res => {
                     n.statsLoaded = true;
                     n = _.merge(n, res.data);
                 }, () => {
